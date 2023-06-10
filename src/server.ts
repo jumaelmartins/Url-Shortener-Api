@@ -8,15 +8,12 @@ const urlController = new URLcontroller();
 
 const dataBase = new MongoConnection();
 dataBase.connect().then(() => {
-  api.emit("ok");
+  api.listen(port, () =>
+    console.log(`Escutando na porta ${port} http://localhost:${port}`)
+  );
 });
 
 api.use(express.json());
 
 api.post("/shorten", urlController.shorten);
-
-api.on("ok", () => {
-  api.listen(port, () =>
-    console.log(`Escutando na porta ${port} http://localhost:${port}`)
-  );
-});
+api.get("/:hash", urlController.redirect)

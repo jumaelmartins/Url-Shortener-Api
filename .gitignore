@@ -8,3 +8,4 @@ testes
 .vercel
 node_modules
 dist
+package-lock.json
