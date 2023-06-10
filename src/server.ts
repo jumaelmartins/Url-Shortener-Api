@@ -7,12 +7,16 @@ const port = 9000;
 const urlController = new URLcontroller();
 
 const dataBase = new MongoConnection();
-dataBase.connect();
+dataBase.connect().then(() => {
+  api.emit("ok");
+});
 
 api.use(express.json());
 
 api.post("/shorten", urlController.shorten);
 
-api.listen(port, () =>
-  console.log(`Escutando na porta ${port} http://localhost:${port}`)
-);
+api.on("ok", () => {
+  api.listen(port, () =>
+    console.log(`Escutando na porta ${port} http://localhost:${port}`)
+  );
+});

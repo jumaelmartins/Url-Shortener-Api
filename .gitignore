@@ -1,4 +1,10 @@
-node_modules
-dist
+tests
+.vscode
 .env
 env
+venv
+testes
+.DS_Store
+.vercel
+node_modules
+dist
